@@ -1,0 +1,55 @@
+/*
+
+#Base files
+!.gitignore
+!README.md
+
+#Unneeded stuff
+**/.DS_Store
+**.log
+
+#Include SPT_Data
+!SPT_Data/
+
+#Include SPT_Data/Server
+!SPT_Data/Server/
+
+#Include SPT_Data/Launcher/Patches & /Locales
+!SPT_Data/Launcher/
+SPT_Data/Launcher/*
+!SPT_Data/Launcher/Patches/
+!SPT_Data/Launcher/Locales/
+
+#Include BepInEx core
+!BepInEx
+BepInEx/*
+!BepInEx/config
+!BepInEx/core
+!BepInEx/patchers
+
+
+# BepInEx Plugins 
+!BepInEx/plugins
+
+# Custom BepInNex mod exclusions
+BepInEx/plugins/DanW-SPTQuestingBots/log
+
+
+#Include EscapeFromTarkov_Data/Managed/SPT.Common.dll & SPT.Reflection.dll
+!EscapeFromTarkov_Data/
+EscapeFromTarkov_Data/*
+!EscapeFromTarkov_Data/Managed
+EscapeFromTarkov_Data/Managed/*
+!EscapeFromTarkov_Data/Managed/Aki.Common.dll
+!EscapeFromTarkov_Data/Managed/Aki.Reflection.dll
+
+#Include User/Mods/
+!User
+User/*
+!User/Mods
+
+#Include other files
+!SPT.Launcher.exe
+!SPT.Server.exe
+!doorstop_config.ini
+!winhttp.dll
