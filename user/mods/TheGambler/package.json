@@ -1,6 +1,6 @@
 {
     "name": "TheGambler",
-    "version": "0.1.10",
+    "version": "0.1.11",
     "sptVersion": "~3.9",
     "loadBefore": [],
     "loadAfter": [],

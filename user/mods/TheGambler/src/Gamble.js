@@ -548,9 +548,9 @@ class Gamble {
         }
         if (id != "NaN") {
             let ammoRoll;
-            ammoRoll = this.randomUtil.getFloat(this.config.odds[name + '_min'], this.config.odds[name + '_max']);
+            ammoRoll = this.randomUtil.getInt(this.config.odds[name + '_min'], this.config.odds[name + '_max']);
             this.newItemsRequest.itemsWithModsToAdd[this.count] = [this.newItemFormat(id, ammoRoll)];
-            this.newItemsRequest.foundInRaid = false;
+            this.newItemsRequest.foundInRaid = true;
             this.count++;
         }
         else {
