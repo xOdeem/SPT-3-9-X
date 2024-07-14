@@ -1,7 +1,7 @@
 {
     "name": "WTTArmorySVD",
     "author": "Tron",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "license": "NCSA",
     "main": "src/mod.js",
     "sptVersion": "~3.9",

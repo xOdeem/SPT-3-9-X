@@ -1,2 +1,3 @@
 # TheGambler
-Check out the config file located in config/config.jsonc as this is where all Gambler properties can be altered
+SPT mod
+https://hub.sp-tarkov.com/files/file/2013-the-gambler-trader/

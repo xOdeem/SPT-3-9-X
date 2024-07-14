@@ -109,9 +109,6 @@ class SampleTrader {
     //
     newOpenRandomLoot(container, pmcData, body, sessionID) {
         // Needed reference methods
-        // Message Notifier Doesn't Work Yet...
-        //const notifierHelper = container.resolve<NotifierHelper>("NotifierHelper");
-        //const notificationSendHelper = container.resolve<NotificationSendHelper>("NotificationSendHelper");
         const lootGenerator = container.resolve("LootGenerator");
         const itemHelper = container.resolve("ItemHelper");
         const inventoryHelper = container.resolve("InventoryHelper");
@@ -153,47 +150,14 @@ class SampleTrader {
         else {
             // Other custom gambling containers added by different mods
             //this.logger.info(`GET RANDOM LOOT CONTAINER LOOT`);
-            // Other random containers
             // Get summary of loot from config
             const rewardContainerDetails = inventoryHelper.getRandomLootContainerRewardDetails(openedItem._tpl);
             const getLoot = lootGenerator.getRandomLootContainerLoot(rewardContainerDetails);
-            //this.logger.info(getLoot);
             newItemsRequest.itemsWithModsToAdd.push(...getLoot);
             newItemsRequest.foundInRaid = rewardContainerDetails.foundInRaid;
         }
-        /*
-        notifierHelper.createNewMessageNotification({ // Not Working
-                    "_id": "",
-                    "uid": "",
-                    "type": 13,
-                    "dt": 69,
-                    "text": "Inventory Full!",
-                    "hasRewards": false, //idk
-                    "rewardCollected": false,//idk
-                    "items": {},
-                    "maxStorageTime": null
-                });
-        */
         const output = eventOutputHolder.getOutput(sessionID);
         let multipleItems;
-        /*
-        let message: Message = { // Not Working
-            _id: String,
-            uid: String,
-            type: MessageType,
-            text: String,
-            dt: Number
-        };
-        message._id = this.hashUtil.generate();
-        message.uid = this.hashUtil.generate();
-        message.type = 13;
-        message.text = "Inventory Full"
-        message.dt = 69
-        */
-        //this.logger.info(multipleItems);
-        //this.logger.info(message.type);
-        //console.log("END")
-        //console.log(newItemsRequest.itemsWithModsToAdd)
         if (newItemsRequest.itemsWithModsToAdd.length != 0) {
             if (inventoryHelper.canPlaceItemsInInventory(sessionID, newItemsRequest.itemsWithModsToAdd)) {
                 inventoryHelper.removeItem(pmcData, body.item, sessionID, output);

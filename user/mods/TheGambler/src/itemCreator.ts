@@ -1,33 +1,58 @@
 import { DependencyContainer } from "tsyringe";
 import { HashUtil } from "@spt/utils/HashUtil";
 import { Item } from "@spt/models/eft/common/tables/IItem";
+import { ItemHelper } from "@spt/helpers/ItemHelper";
 
-import { Weapons } from './containers/Weapons';
-import { Armors } from './containers/Armors';
-import { Helmets } from './containers/Helmets';
+import { WeaponPresets } from './presets/WeaponPresets';
+import { ArmorPresets } from './presets/ArmorPresets';
+import { HelmetPresets } from './presets/HelmetPresets';
 
 
 export class ItemCreator {
 
-    protected Weapons: any;
-    protected Helmets: any;
-    protected armor: any;
-    protected hashUtil: HashUtil;
+    public Weapons: any;
+    public Helmets: any;
+    public Armors: any;
+    public caliber: string;
+    public magazine: string;
+    public magazineMaxAmmo: number;
+    public weaponType: string;
+    private hashUtil: HashUtil;
+    private itemHelper: ItemHelper;
 
     constructor(container: DependencyContainer){
-        this.Weapons = new Weapons();
-        this.Helmets = new Helmets();
-        this.armor = new Armors();
+        this.Weapons = new WeaponPresets();
+        this.Helmets = new HelmetPresets();
+        this.Armors = new ArmorPresets();
         this.hashUtil = container.resolve<HashUtil>("HashUtil");
+        this.itemHelper = container.resolve<ItemHelper>("ItemHelper");
     }
 
     // getRandomInt(3) returns 0, 1, or 2
-    protected getRandomInt(max: number) {
+    private getRandomInt(max: number) {
         return Math.floor(Math.random() * max);
     }
 
+    public createPreset(name: string, rarity: string): Item{
+        let itemPreset: Item[] = [];
+        //console.log('createPreset ' + name + ' ' + rarity)
+
+        switch(name){
+            case 'helmet':
+                itemPreset = this.createHelmet(rarity);
+                break;
+            case 'armor':
+                itemPreset = this.createArmor(rarity);
+                break;
+            case 'weapon':
+                itemPreset = this.createGun(rarity);
+                break;
+        }
+        return itemPreset
+    }
+
     // Returns a random helmet from Helmets
-    public createHelmet(which: string): Item{
+    private createHelmet(which: string): Item{
         let baseHelmet: Item[];
 
         if(which == "common") {
@@ -41,31 +66,31 @@ export class ItemCreator {
         }
 
         const randomHelmet = this.getRandomInt(baseHelmet.length);
-        let getItem = baseHelmet[randomHelmet].Items;
+        let getItem = baseHelmet[randomHelmet];
         
         return this.generateItem(getItem);
     }
 
-    // Returns a random armor from Armors
-    public createArmor(which: string): Item{
+    // Returns a random Armor from Armors
+    private createArmor(which: string): Item{
         let baseArmor: Item[];
 
         if(which == "common") {
-            baseArmor = this.armor.commonArmor;
+            baseArmor = this.Armors.commonArmor;
         } else if (which == "uncommon") {
-            baseArmor = this.armor.uncommonArmor;
+            baseArmor = this.Armors.uncommonArmor;
         } else if (which == "rare") {
-            baseArmor = this.armor.rareArmor;
+            baseArmor = this.Armors.rareArmor;
         }
 
         const randomArmor = this.getRandomInt(baseArmor.length);
-        let getItem = baseArmor[randomArmor].Items;
+        let getItem = baseArmor[randomArmor];
         
         return this.generateItem(getItem);
     }
 
     // Returns a random gun from Weapons
-    public createGun(which: string): Item{
+    private createGun(which: string): Item{
         let weaponBuilds: Item[];
 
         //console.log('WHICH = ' + which)
@@ -83,16 +108,18 @@ export class ItemCreator {
         }
 
         const randomBuild = this.getRandomInt(weaponBuilds.length);
-        let getItem = weaponBuilds[randomBuild].Items;
-
+        let getItem = weaponBuilds[randomBuild];
+        this.weaponType = which;
         return this.generateItem(getItem);
     }
 
-    private generateItem(build: Item[]): Item[] {
+    private generateItem(build: any): Item[] {
         const item: Item[] = [];
         // We map every build[i]._id to a newly generated _id inside of parenIdMap. We HAVE to do this as if we have two duplicate items they would have the same _id which will brick the player inventory.
         const parentIdMap = {};
         const _randomId = this.hashUtil.generate(); // New Item baseId;
+        const weapon_name = build['Name']? build['Name'] : undefined;
+        build = build.Items;
 
         let baseId;
         for(let i = 0; i < build.length; i++){
@@ -128,6 +155,13 @@ export class ItemCreator {
                     });
 
                 } else {
+                    if(build[i].slotId == "mod_magazine") {
+                        // Save magazine
+                        this.magazine = build[i]._tpl;
+                        // Maximum rounds in saved magazine
+                        const magInfo = this.itemHelper.getItem(this.magazine)
+                        this.magazineMaxAmmo = magInfo[1]._props.Cartridges[0]._max_count;
+                    }
                     item.push({
                         _id: newId,
                         _tpl: build[i]._tpl,
@@ -143,6 +177,8 @@ export class ItemCreator {
                 }
             }
         }
+        const itemInfo = this.itemHelper.getItem(item[0]._tpl)
+        this.caliber = itemInfo[1]._props.ammoCaliber; // save caliber
         return item;
     }
 

@@ -131,7 +131,7 @@ class ItemCreateHelper {
                 "en": {
                     name: "Mystery Wallet",
                     shortName: "Mystery Wallet",
-                    description: `Wager your Roubles to win more, or lose it all!\n==============================\n0 Roubles - 40.0%\n50k Roubles - ${this.config.odds['wallet_common']}%\n100k Roubles - ${this.config.odds['wallet_uncommon']}%\n300k Roubles - ${this.config.odds['wallet_kinda_rare']}%\n500k Roubles - ${this.config.odds['wallet_rare']}%\n1 Million Roubles - ${this.config.odds['wallet_extremely_rare']}%`
+                    description: `Wager your Roubles to win more, or lose it all!\n==============================\n0 Roubles - 25.0%\n25k Roubles - ${this.config.odds['wallet_extra_common']}%\n50k Roubles - ${this.config.odds['wallet_common']}%\n100k Roubles - ${this.config.odds['wallet_uncommon']}%\n300k Roubles - ${this.config.odds['wallet_kinda_rare']}%\n500k Roubles - ${this.config.odds['wallet_rare']}%\n1 Million Roubles - ${this.config.odds['wallet_extremely_rare']}%`
                 }
             }
         };
@@ -342,6 +342,111 @@ class ItemCreateHelper {
                     name: "Mystery Stimulant",
                     shortName: "Mystery Stimulant",
                     description: `Looking for your next pick me up? We have all the drugs you could ask for!\n==============================\nCommon Stimulant - ${this.config.odds['stim_common']}%\nUncommon Stimulant - ${this.config.odds['stim_uncommon']}%\nRare Stimulant - ${this.config.odds['stim_rare']}%`
+                }
+            }
+        };
+        const medicalGamble = {
+            newItem: {
+                _id: "zz_medical_gamble",
+                _name: "gambling_medical",
+                _parent: "62f109593b54472778797866",
+                _props: {
+                    "AnimationVariantsNumber": 0,
+                    "BackgroundColor": "orange",
+                    "BlocksArmorVest": false,
+                    "CanPutIntoDuringTheRaid": true,
+                    "CanRequireOnRagfair": false,
+                    "CanSellOnRagfair": false,
+                    "CantRemoveFromSlotsDuringRaid": [],
+                    "ConflictingItems": [],
+                    "Description": "Mystery Medical Kit",
+                    "DiscardLimit": -1,
+                    "DiscardingBlock": false,
+                    "DropSoundType": "None",
+                    "ExamineExperience": 100,
+                    "ExamineTime": 1,
+                    "ExaminedByDefault": true,
+                    "ExtraSizeDown": 0,
+                    "ExtraSizeForceAdd": false,
+                    "ExtraSizeLeft": 0,
+                    "ExtraSizeRight": 0,
+                    "ExtraSizeUp": 0,
+                    "Grids": [
+                        {
+                            "_id": "6489c03c8bc5233fdc78e789",
+                            "_name": "main",
+                            "_parent": "6489c03c8bc5233fdc78e788",
+                            "_props": {
+                                "cellsH": 1,
+                                "cellsV": 1,
+                                "filters": [
+                                    {
+                                        "ExcludedFilter": [
+                                            "54009119af1c881c07000029"
+                                        ],
+                                        "Filter": []
+                                    }
+                                ],
+                                "isSortingTable": false,
+                                "maxCount": 99,
+                                "maxWeight": 0,
+                                "minCount": 1
+                            },
+                            "_proto": "55d329c24bdc2d892f8b4567"
+                        }
+                    ],
+                    "Height": 3,
+                    "HideEntrails": true,
+                    "InsuranceDisabled": false,
+                    "IsAlwaysAvailableForInsurance": false,
+                    "IsLockedafterEquip": false,
+                    "IsSpecialSlotOnly": false,
+                    "IsUnbuyable": false,
+                    "IsUndiscardable": false,
+                    "IsUngivable": false,
+                    "IsUnremovable": false,
+                    "IsUnsaleable": false,
+                    "ItemSound": "container_plastic",
+                    "LootExperience": 20,
+                    "MergesWithChildren": false,
+                    "Name": "Mystery Medical Kit",
+                    "NotShownInSlot": false,
+                    "Prefab": {
+                        "path": "assets/content/items/containers/item_container_meds/item_container_meds.bundle",
+                        "rcid": ""
+                    },
+                    "QuestItem": false,
+                    "QuestStashMaxCount": 0,
+                    "RagFairCommissionModifier": 1,
+                    "RepairCost": 0,
+                    "RepairSpeed": 0,
+                    "SearchSound": "drawer_metal_looting",
+                    "ShortName": "Mystery Medical Kit",
+                    "Slots": [],
+                    "StackMaxSize": 1,
+                    "StackObjectsCount": 1,
+                    "Unlootable": false,
+                    "UnlootableFromSide": [],
+                    "UnlootableFromSlot": "FirstPrimaryWeapon",
+                    "UsePrefab": {
+                        "path": "",
+                        "rcid": ""
+                    },
+                    "Weight": 2,
+                    "Width": 3,
+                    "ReverbVolume": 0
+                },
+                _proto: "",
+                _type: "Item"
+            },
+            fleaPriceRoubles: 275000,
+            handbookPriceRoubles: 275000,
+            handbookParentId: "5b5f6fa186f77409407a7eb7",
+            locales: {
+                "en": {
+                    name: "Mystery Medical Kit",
+                    shortName: "Mystery Medical Kit",
+                    description: `Hey soldier, looking for some meds to keep you alive out there? I have a business to run here and I don't have time to sort through all this stuff. Take a chance and see what you get!`
                 }
             }
         };
@@ -656,14 +761,14 @@ class ItemCreateHelper {
                 "en": {
                     name: "Mystery Keycard",
                     shortName: "Mystery Keycard",
-                    description: `So you want to get into labs? Try your luck. Maybe you get, maybe you don't!\n==============================\nNothing - 25.0%\nAccess Keycard - ${this.config.odds['keycard_access']}%\n21WS Keycard - ${this.config.odds['keycard_21WS']}%\n11SR Keycard - ${this.config.odds['keycard_11SR']}%\nKeycard with a blue marking - ${this.config.odds['keycard_blue_marking']}%\nYellow Keycard - ${this.config.odds['keycard_yellow']}%\nBlack Keycard - ${this.config.odds['keycard_black']}%\nViolet Keycard - ${this.config.odds['keycard_violet']}%\nBlue Keycard - ${this.config.odds['keycard_blue']}%\nGreen Keycard - ${this.config.odds['keycard_green']}%\nRed Keycard - ${this.config.odds['keycard_red']}%`
+                    description: `So you want to get into labs? Try your luck. Maybe you get the card you've been dreaming of, maybe you don't!\n==============================\nAccess Keycard - ${this.config.odds['keycard_access']}%\n21WS Keycard - ${this.config.odds['keycard_21WS']}%\n11SR Keycard - ${this.config.odds['keycard_11SR']}%\nKeycard with a blue marking - ${this.config.odds['keycard_blue_marking']}%\nYellow Keycard - ${this.config.odds['keycard_yellow']}%\nBlack Keycard - ${this.config.odds['keycard_black']}%\nViolet Keycard - ${this.config.odds['keycard_violet']}%\nBlue Keycard - ${this.config.odds['keycard_blue']}%\nGreen Keycard - ${this.config.odds['keycard_green']}%\nRed Keycard - ${this.config.odds['keycard_red']}%`
                 }
             }
         };
         const fiftyFiftyGamble = {
             newItem: {
                 _id: "z_50/50_gamble",
-                _name: "gambling_50/50",
+                _name: "gambling_roubles",
                 _parent: "62f109593b54472778797866",
                 _props: {
                     "AnimationVariantsNumber": 0,
@@ -761,7 +866,7 @@ class ItemCreateHelper {
                 "en": {
                     name: "50/50 Case",
                     shortName: "50/50 Case",
-                    description: "The true all in, ALL OR NOTHING!\n==============================\nDelicious Can of Beef Stew - 50.0%\n5 Million Roubles - 50.0%"
+                    description: "ARE YOU SCARED??? DON'T BE! THIS COULD BE YOU'RE CHANCE TO WIN IT ALL! THE TRUE ALL IN OR NOTHING!\n==============================\nDelicious Can of Beef Stew - 50.0%\n5 Million Roubles - 50.0%"
                 }
             }
         };
@@ -866,7 +971,7 @@ class ItemCreateHelper {
                 "en": {
                     name: "Mystery Food",
                     shortName: "Mystery Food",
-                    description: `Come along friend, you look a little peckish. Try your luck at scoring a delicious snack!\n==============================\nCommon Food - ${this.config.odds['food_common']}%\nUncommon Food - ${this.config.odds['food_uncommon']}%\nRare Food - ${this.config.odds['food_rare']}%\n`
+                    description: `Come along friend, you look a little hungry. Try your luck at scoring a delicious snack!\n==============================\nCommon Food - ${this.config.odds['food_common']}%\nUncommon Food - ${this.config.odds['food_uncommon']}%\nRare Food - ${this.config.odds['food_rare']}%\n`
                 }
             }
         };
@@ -971,7 +1076,7 @@ class ItemCreateHelper {
                 "en": {
                     name: "Mystery Melee",
                     shortName: "Mystery Melee",
-                    description: `Looking for a shiny new melee weapon? Well do we have you covered!\n==============================\nCommon Melee - ${this.config.odds['melee_common']}%\nUncommon Melee - ${this.config.odds['melee_uncommon']}%\nRare Melee - ${this.config.odds['melee_rare']}%\nExtremely Rare Melee - ${this.config.odds['melee_extremely_rare']}%`
+                    description: `Looking for a shiny new weapon to beat your foes with? Come test your luck!\n\n PS: These weapons may or may have not been stolen from a sad little Timmy who didn't shove this up their pouch in time... poor timmy :'(\n==============================\nCommon Melee - ${this.config.odds['melee_common']}%\nUncommon Melee - ${this.config.odds['melee_uncommon']}%\nRare Melee - ${this.config.odds['melee_rare']}%\nExtremely Rare Melee - ${this.config.odds['melee_extremely_rare']}%`
                 }
             }
         };
@@ -1076,7 +1181,7 @@ class ItemCreateHelper {
                 "en": {
                     name: "Weapon Mystery Box",
                     shortName: "Weapon Mystery Box",
-                    description: `Weapon Mystery Box, contains over 230 different guns ranging from Meta Chad weapons, early wipe weapons, and cursed weapons \n==============================\nFully Modded Weapon - ${this.config.odds['gun_meta']}%\nMeme Weapon - ${this.config.odds['gun_meme']}%\nSemi-modded Weapon - ${this.config.odds['gun_decent']}%\nScav Weapon - ${this.config.odds['gun_scav']}%\nDefault Weapon - ${this.config.odds['gun_base']}%`
+                    description: `Weapon Mystery Box, contains over 305 different weapons ranging from Meta/Chad weapons, early wipe weapons, scav weapons, meme/cursed weapons, and much more... \n==============================\nFully Modded Weapon - ${this.config.odds['weapon_meta']}%\nMeme Weapon - ${this.config.odds['weapon_meme']}%\nSemi-modded Weapon - ${this.config.odds['weapon_decent']}%\nScav Weapon - ${this.config.odds['weapon_scav']}%\nDefault Weapon - ${this.config.odds['weapon_base']}%`
                 }
             }
         };
@@ -1181,7 +1286,7 @@ class ItemCreateHelper {
                 "en": {
                     name: "Premium Weapon Mystery Box",
                     shortName: "Premium Weapon Mystery Box",
-                    description: `The Premium Weapon Mystery Box contains a guaranteed heavily modded weappon\n==============================\nRare Weapon - ${this.config.odds['premium_armor_rare']}%`
+                    description: `The Premium Weapon Mystery Box contains a guaranteed heavily modded weappon\n==============================\nRare Weapon - ${this.config.odds['premium_weapon_meta']}%`
                 }
             }
         };
@@ -1286,7 +1391,7 @@ class ItemCreateHelper {
                 "en": {
                     name: "Mystery Helmet",
                     shortName: "Mystery Helmet",
-                    description: `Are you tired of Chad PMCs one tapping your dome? Well I can offer protection for you! Purchase a Helmet Mystery Box today!\n==============================\nCommon Helmet - ${this.config.odds['helmet_common']}%\nUncommon Helmet - ${this.config.odds['helmet_uncommon']}%\nRare Helmet - ${this.config.odds['helmet_rare']}%\nExtremely Rare T-7 Thermal Helmet - ${this.config.odds['helmet_extremely_rare']}%`
+                    description: `Are you tired of Chad PMCs one tapping the largest part of your player? Well I can offer protection for you! Purchase a Helmet Mystery Box today!\n==============================\nCommon Helmet - ${this.config.odds['helmet_common']}%\nUncommon Helmet - ${this.config.odds['helmet_uncommon']}%\nRare Helmet - ${this.config.odds['helmet_rare']}%\nExtremely Rare T-7 Thermal Helmet - ${this.config.odds['helmet_extremely_rare']}%`
                 }
             }
         };
@@ -1496,7 +1601,112 @@ class ItemCreateHelper {
                 "en": {
                     name: "Backpack Mystery Bag",
                     shortName: "Backpack Mystery Bag",
-                    description: `Need a new bag for your next loot run? We got you covered!\n==============================\nCommon Backpack - ${this.config.odds['backpack_common']}%\nUncommon Backpack - ${this.config.odds['backpack_uncommon']}%\nRare Backpack - ${this.config.odds['backpack_rare']}%\nExtremely Rare Backpack - ${this.config.odds['backpack_extremely_rare']}%`
+                    description: `Need a new bag for your next loot run? Come try these bags for size!\n==============================\nCommon Backpack - ${this.config.odds['backpack_common']}%\nUncommon Backpack - ${this.config.odds['backpack_uncommon']}%\nRare Backpack - ${this.config.odds['backpack_rare']}%\nExtremely Rare Backpack - ${this.config.odds['backpack_extremely_rare']}%`
+                }
+            }
+        };
+        const loadoutGamble = {
+            newItem: {
+                _id: "ws_loadout_gamble",
+                _name: "gambling_loadout",
+                _parent: "62f109593b54472778797866",
+                _props: {
+                    "AnimationVariantsNumber": 0,
+                    "BackgroundColor": "orange",
+                    "BlocksArmorVest": false,
+                    "CanPutIntoDuringTheRaid": true,
+                    "CanRequireOnRagfair": false,
+                    "CanSellOnRagfair": false,
+                    "CantRemoveFromSlotsDuringRaid": [],
+                    "ConflictingItems": [],
+                    "Description": "Loadout Mystery Box",
+                    "DiscardLimit": -1,
+                    "DiscardingBlock": false,
+                    "DropSoundType": "None",
+                    "ExamineExperience": 100,
+                    "ExamineTime": 1,
+                    "ExaminedByDefault": true,
+                    "ExtraSizeDown": 0,
+                    "ExtraSizeForceAdd": false,
+                    "ExtraSizeLeft": 0,
+                    "ExtraSizeRight": 0,
+                    "ExtraSizeUp": 0,
+                    "Grids": [
+                        {
+                            "_id": "6489c03c8bc5233fdc78e789",
+                            "_name": "main",
+                            "_parent": "6489c03c8bc5233fdc78e788",
+                            "_props": {
+                                "cellsH": 1,
+                                "cellsV": 1,
+                                "filters": [
+                                    {
+                                        "ExcludedFilter": [
+                                            "54009119af1c881c07000029"
+                                        ],
+                                        "Filter": []
+                                    }
+                                ],
+                                "isSortingTable": false,
+                                "maxCount": 99,
+                                "maxWeight": 0,
+                                "minCount": 1
+                            },
+                            "_proto": "55d329c24bdc2d892f8b4567"
+                        }
+                    ],
+                    "Height": 7,
+                    "HideEntrails": true,
+                    "InsuranceDisabled": false,
+                    "IsAlwaysAvailableForInsurance": false,
+                    "IsLockedafterEquip": false,
+                    "IsSpecialSlotOnly": false,
+                    "IsUnbuyable": false,
+                    "IsUndiscardable": false,
+                    "IsUngivable": false,
+                    "IsUnremovable": false,
+                    "IsUnsaleable": false,
+                    "ItemSound": "container_plastic",
+                    "LootExperience": 20,
+                    "MergesWithChildren": false,
+                    "Name": "Loadout Mystery Box",
+                    "NotShownInSlot": false,
+                    "Prefab": {
+                        "path": "assets/content/items/equipment/backpack_blackjack/item_equipment_backpack_blackjack.bundle",
+                        "rcid": ""
+                    },
+                    "QuestItem": false,
+                    "QuestStashMaxCount": 0,
+                    "RagFairCommissionModifier": 1,
+                    "RepairCost": 0,
+                    "RepairSpeed": 0,
+                    "SearchSound": "drawer_metal_looting",
+                    "ShortName": "Loadout Mystery Box",
+                    "Slots": [],
+                    "StackMaxSize": 1,
+                    "StackObjectsCount": 1,
+                    "Unlootable": false,
+                    "UnlootableFromSide": [],
+                    "UnlootableFromSlot": "FirstPrimaryWeapon",
+                    "UsePrefab": {
+                        "path": "",
+                        "rcid": ""
+                    },
+                    "Weight": 2,
+                    "Width": 5,
+                    "ReverbVolume": 0
+                },
+                _proto: "",
+                _type: "Item"
+            },
+            fleaPriceRoubles: 79750,
+            handbookPriceRoubles: 79750,
+            handbookParentId: "5b5f6fa186f77409407a7eb7",
+            locales: {
+                "en": {
+                    name: "Loadout Mystery Bag",
+                    shortName: "Loadout Mystery Bag",
+                    description: `A full raid kit in one unbox! What more could you ask for? Items unboxed include: weapon, extra magazines, ammo, armor, rig, helmet, headset, backpack, food, drink, and medical supplies.`
                 }
             }
         };
@@ -1706,7 +1916,7 @@ class ItemCreateHelper {
                 "en": {
                     name: "Armor Mystery Box",
                     shortName: "Armor Mystery Box",
-                    description: `Armor Mystery Box contains most armors that can appear in throughout Tarkov\n==============================\nCommon Armor - ${this.config.odds['armor_common']}%\nUncommon Armor - ${this.config.odds['armor_uncommon']}%\nRare Armor - ${this.config.odds['armor_rare']}%`
+                    description: `Need protection? Better be safe than sorry. Otherwise, that Timmy will catch you lacking.\n==============================\nCommon Armor - ${this.config.odds['armor_common']}%\nUncommon Armor - ${this.config.odds['armor_uncommon']}%\nRare Armor - ${this.config.odds['armor_rare']}%`
                 }
             }
         };
@@ -1811,7 +2021,7 @@ class ItemCreateHelper {
                 "en": {
                     name: "Premium Armor Mystery Box",
                     shortName: "Premium Armor Mystery Box",
-                    description: `The Premium Armor Mystery Box contains some of the highest tiers of armor found throughout Tarkov\n==============================\nRare Armor - ${this.config.odds['premium_armor_rare']}%`
+                    description: `So you need something a little better than a PACA? Alright... sheesh.. Since I like you a little better than the rest, I have a sweet deal I can offer you. I don't have much of these left to offer, but you can try your luck.\n==============================\nRare Armor - ${this.config.odds['premium_armor_rare']}%`
                 }
             }
         };
@@ -2014,8 +2224,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 10000,
-            handbookPriceRoubles: 10000,
+            fleaPriceRoubles: 14000,
+            handbookPriceRoubles: 14000,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -2119,8 +2329,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 10000,
-            handbookPriceRoubles: 10000,
+            fleaPriceRoubles: 19500,
+            handbookPriceRoubles: 19500,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -2224,8 +2434,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 10000,
-            handbookPriceRoubles: 10000,
+            fleaPriceRoubles: 19000,
+            handbookPriceRoubles: 19000,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -2329,8 +2539,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 10000,
-            handbookPriceRoubles: 10000,
+            fleaPriceRoubles: 13000,
+            handbookPriceRoubles: 13000,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -2434,8 +2644,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 10000,
-            handbookPriceRoubles: 10000,
+            fleaPriceRoubles: 19000,
+            handbookPriceRoubles: 19000,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -2539,8 +2749,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 10000,
-            handbookPriceRoubles: 10000,
+            fleaPriceRoubles: 23000,
+            handbookPriceRoubles: 23000,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -2644,8 +2854,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 10000,
-            handbookPriceRoubles: 10000,
+            fleaPriceRoubles: 20000,
+            handbookPriceRoubles: 20000,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -2749,8 +2959,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 12500,
-            handbookPriceRoubles: 12500,
+            fleaPriceRoubles: 20000,
+            handbookPriceRoubles: 20000,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -2854,8 +3064,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 14500,
-            handbookPriceRoubles: 14500,
+            fleaPriceRoubles: 25000,
+            handbookPriceRoubles: 25000,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -2959,8 +3169,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 15000,
-            handbookPriceRoubles: 15000,
+            fleaPriceRoubles: 22500,
+            handbookPriceRoubles: 22500,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -3064,8 +3274,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 15000,
-            handbookPriceRoubles: 15000,
+            fleaPriceRoubles: 22500,
+            handbookPriceRoubles: 22500,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -3169,8 +3379,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 17500,
-            handbookPriceRoubles: 17500,
+            fleaPriceRoubles: 24500,
+            handbookPriceRoubles: 24500,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -3274,8 +3484,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 16500,
-            handbookPriceRoubles: 16500,
+            fleaPriceRoubles: 26000,
+            handbookPriceRoubles: 26000,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -3379,8 +3589,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 65000,
-            handbookPriceRoubles: 65000,
+            fleaPriceRoubles: 80000,
+            handbookPriceRoubles: 80000,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -3484,8 +3694,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 15000,
-            handbookPriceRoubles: 15000,
+            fleaPriceRoubles: 22000,
+            handbookPriceRoubles: 22000,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -3589,8 +3799,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 15000,
-            handbookPriceRoubles: 15000,
+            fleaPriceRoubles: 17000,
+            handbookPriceRoubles: 17000,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -3694,8 +3904,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 16000,
-            handbookPriceRoubles: 16000,
+            fleaPriceRoubles: 25500,
+            handbookPriceRoubles: 25500,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -3799,8 +4009,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 10000,
-            handbookPriceRoubles: 10000,
+            fleaPriceRoubles: 14500,
+            handbookPriceRoubles: 14500,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -3904,8 +4114,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 10000,
-            handbookPriceRoubles: 10000,
+            fleaPriceRoubles: 16000,
+            handbookPriceRoubles: 16000,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -4009,8 +4219,8 @@ class ItemCreateHelper {
                 _proto: "",
                 _type: "Item"
             },
-            fleaPriceRoubles: 10000,
-            handbookPriceRoubles: 10000,
+            fleaPriceRoubles: 18000,
+            handbookPriceRoubles: 18000,
             handbookParentId: "5b5f6fa186f77409407a7eb7",
             locales: {
                 "en": {
@@ -4024,6 +4234,7 @@ class ItemCreateHelper {
         customItem.createItem(walletGamble);
         customItem.createItem(keyGamble);
         customItem.createItem(stimGamble);
+        customItem.createItem(medicalGamble);
         customItem.createItem(foodGamble);
         customItem.createItem(bitcoinGamble);
         customItem.createItem(gpcoinGamble);
@@ -4034,6 +4245,7 @@ class ItemCreateHelper {
         customItem.createItem(helmetGamble);
         customItem.createItem(headsetGamble);
         customItem.createItem(backpackGamble);
+        customItem.createItem(loadoutGamble);
         customItem.createItem(rigGamble);
         customItem.createItem(armorGamble);
         customItem.createItem(premiumArmorGamble);

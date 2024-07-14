@@ -3,406 +3,269 @@ import { Armors } from "./containers/Armors";
 import { Backpacks } from "./containers/Backpacks";
 import { Foods } from "./containers/Foods";
 import { Headsets } from "./containers/Headsets";
+import { Helmets } from "./containers/Helmets";
+import { Keycard } from "./containers/Keycard";
 import { Melees } from "./containers/Melees";
+import { PremiumArmors } from "./containers/PremiumArmors";
+import { PremiumWeapons } from "./containers/PremiumWeapons";
 import { Rigs } from "./containers/Rigs";
 import { Stims } from "./containers/Stims";
 import { Wallet } from "./containers/Wallet";
+import { Weapons } from "./containers/Weapons";
 import { Keys } from "./containers/keys";
+import { FlipRouble } from "./containers/FlipRouble";
+import { FlipGPCoin } from "./containers/FlipGPCoin";
+import { FlipBitcoin } from "./containers/FlipBitcoin";
+import { Loadouts } from "./containers/Loadouts";
+import { Medical } from "./containers/Medical";
+import { LoadoutFood } from "./containers/LoadoutFood";
+import { Loadoutdrink } from "./containers/LoadoutDrink";
+import { LoadoutLightBleed } from "./containers/LoadoutLightBleed";
+import { LoadoutHeavyBleed } from "./containers/LoadoutHeavyBleed";
+import { LoadoutHealing } from "./containers/LoadoutHealing";
 
-export class MysteryContainer{
+class Container {
+
+    public name: string;
+    public parent: string
+    public rarities: Array<string>;
+    public odds: Array<number>;
+    public stackable: Array<boolean>;
+    public min: number;
+    public max: number;
+    public override: {};
+    public rarity_average_profit: Array<number>;
+    public profit_percentage: number;
+    public guaranteed_rewards: Array<string>;
+    public guaranteed_stackable: Array<boolean>;
+    public guaranteed_reward_amount: Array<number>;
+    public guaranteed_randomness: Array<boolean>;
+    public reward_amount: Array<number>;
+    public reward_rolls: Array<number>;
+    public rewards: any;
+    public presets: Array<string>;
+
+    constructor(name: string) {
+        this.name                  = name;
+        this.parent                = '';
+        this.rarities              = [];
+        this.odds                  = [];
+        this.stackable             = [];
+        this.override              = {};
+        this.rarity_average_profit = [];
+        this.profit_percentage     = 0;
+        this.reward_amount         = [];
+        this.rewards               = [];
+        this.presets               = [];
+    }
+}
+
+export class MysteryContainer {
 
     private config;
     private logger;
-    private container;
+    private containers;
+    private names;
     public items;
     public simulation;
+    public override;
 
     constructor(config, logger){
         this.config     = config;
         this.logger     = logger;
-        this.container  = this.setConfig(this.containersData)
-        this.simulation = ['wallet', 'armor', 'premium_armor', 'headset', 'rig', 'backpack', 'key', 'melee', 'stim', 'food'];
+        //this.container  = this.setData(this.containersData) Old Way
+        this.names = [
+            'wallet', 'keycard', 'key', 'stim', 'medical', 'food', 'melee', 
+            'backpack', 'rig', 'weapon', 'premium_weapon', 'helmet', 
+            'headset', 'armor', 'premium_armor', 'roubles', 'bitcoin', 'gpcoin',
+             'loadout', 'loadout_food', 'loadout_drink', 'loadout_light_bleed', 'loadout_heavy_bleed', 'loadout_healing', 'ammo'
+        ];
+        this.simulation = ['armor', 'premium_armor', 'headset', 'rig', 'backpack', 'key', 'melee', 'stim', 'food'];
+        this.override    = ['ammo', 'armor'];
         this.items      = {
-            wallet:   new Wallet(),
-            backpack: new Backpacks(),
-            armor:    new Armors(),
-            rig:      new Rigs(),
-            headset:  new Headsets(),
-            key:      new Keys(),
-            melee:    new Melees(),
-            stim:     new Stims(),
-            food:     new Foods(),
-            ammo:     new Ammo()
+            wallet:              new Wallet(),
+            keycard:             new Keycard(),
+            key:                 new Keys(),
+            stim:                new Stims(),
+            medical:             new Medical(),
+            food:                new Foods(),
+            melee:               new Melees(),
+            backpack:            new Backpacks(),
+            rig:                 new Rigs(),
+            helmet:              new Helmets(),
+            headset:             new Headsets(),
+            weapon:              new Weapons(),
+            premium_weapon:      new PremiumWeapons(),
+            armor:               new Armors(),
+            premium_armor:       new PremiumArmors(),
+            ammo:                new Ammo(),
+            roubles:             new FlipRouble(),
+            bitcoin:             new FlipBitcoin(),
+            gpcoin:              new FlipGPCoin(),
+            loadout:             new Loadouts(),
+            loadout_food:        new LoadoutFood(),
+            loadout_drink:       new Loadoutdrink(),
+            loadout_light_bleed: new LoadoutLightBleed(),
+            loadout_heavy_bleed: new LoadoutHeavyBleed(),
+            loadout_healing:     new LoadoutHealing()
         }
-        //console.log('CONTAINER INFO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-        //console.log(this.container);
+        this.containers  = this.setContainers()
     }
 
-    private setConfig(containerData) {
-        let data = containerData;
-        let override = ['ammo', 'armor'];
-        
-        for (const name in data){
-            data[name]['profit_percentage'] = this.config.odds[name + '_profit_percentage'];
-
-            for(let i = 0; i < data[name]['rarities'].length; i++){
+    private setContainers(): { [key: string]: Container } {
+        const containers: { [key: string]: Container } = {};
+    
+        const generateAmount = (length: number, value: boolean | number) => new Array(length).fill(value);
+    
+        const calculateOddsAndRewards = (container: Container, item: any) => {
+            for(let j = 0; j < container.rarities.length; j++){
+                const key = `${container.name}${container.rarities[j]}`;
                 
-                if(i == 0) {
-                    data[name]['odds'][i] = this.config.odds[name + data[name]['rarities'][i]];
+                if(j == 0) {
+                    container.odds[j] = this.config.odds[key];
                 } else {
-                    data[name]['odds'][i] = this.config.odds[name + data[name]['rarities'][i]] + data[name]['odds'][i-1];
+                    container.odds[j] = this.config.odds[key] + container.odds[j-1];
                 }
+                container.rewards[j] = item.rewards? [...item.rewards[j]] : []
             }
-
-            for(let i = 0; i < override.length; i++){
-                const currentName = override[i];
-                //console.log(this.config.mystery_container_override_price[currentName])
-                data[currentName]['override'] = this.config.mystery_container_override_price[currentName];
+        };
+    
+        const applyOverrides = (container: Container, item: any, isAmmo: boolean) => {
+            if (this.override.includes(container.name) || isAmmo) {
+                container.override = this.config.mystery_container_override_price[container.parent];
+                container.stackable = item.stackable || generateAmount(container.rarities.length, true);
             }
+            if (!isAmmo) {
+                container.reward_amount = item.reward_amount || generateAmount(container.rarities.length, 1);
+                container.stackable = item.stackable || generateAmount(container.rarities.length, false);
+            }
+        };
+    
+        const setContainerProperties = (container: Container, name: string, item: any) => {
+            container.min = this.config.odds[`${name}_min`] || 1;
+            container.max = this.config.odds[`${name}_max`] || 1;
+            container.profit_percentage = this.config.odds[`${name}_profit_percentage`];
+            container.presets = item.presets? [...item.presets] : [];
+            container.guaranteed_stackable = item.guaranteed_stackable? item.guaranteed_stackable : undefined
+            container.guaranteed_reward_amount = item.guaranteed_reward_amount? item.guaranteed_reward_amount : undefined
+            container.guaranteed_rewards = item.guaranteed_rewards? item.guaranteed_rewards : undefined
+            container.guaranteed_randomness = item.guaranteed_randomness? item.guaranteed_randomness : undefined
+            container.reward_rolls = item.reward_rolls? item.reward_rolls : undefined
             
-        }
-        return data;
+        };
+    
+        const createAndConfigureContainer = (name: string, item: any, isAmmo: boolean) => {
+            const container = new Container(name);
+            //console.log(container.name)
+            container.rarities = [...item.rarities];
+            container.parent = item.parent;
+            
+            calculateOddsAndRewards(container, item);
+            applyOverrides(container, item, isAmmo);
+            setContainerProperties(container, name, item);
+    
+            containers[name] = container;
+        };
+    
+        this.names.forEach(name => createAndConfigureContainer(name, this.items[name], false));
+        this.items.ammo.names.forEach(name => createAndConfigureContainer(name, this.items.ammo.items[name], true));
+    
+        //console.log('THE CONTAINER!!!');
+        return containers;
+    }
+    
+    // getRandomInt(3) returns 0, 1, or 2
+    private getRandomInt(max: number) {
+        return Math.floor(Math.random() * max);
     }
 
     public getName(name: string): string{
-        return this.container[name]['name'];
+        return this.containers[name].name;
+    }
+
+    public getParent(name: string): string{
+        return this.containers[name].parent;
     }
 
     public getOdds(name: string): Array<number>{
-        return this.container[name]['odds'];
+        return this.containers[name].odds;
     }
 
     public getRarities(name: string): Array<string>{
-        return this.container[name]['rarities'];
+        return this.containers[name].rarities;
+    }
+/*
+    public getOpenAll(name: string): boolean{
+        return this.containers[name].openAll? this.containers[name].openAll : false;
+    }
+*/
+    public getGuaranteedRewards(name: string): Array<string>{
+        return this.containers[name].guaranteed_rewards? this.containers[name].guaranteed_rewards : undefined;
     }
 
-    public getReward(name: string, index: number): any {
-        return this.container[name]['rewards'][index];
+    public getGuaranteedRewardAmount(name: string, rarityIndex: number): any {
+        return this.containers[name].guaranteed_reward_amount[rarityIndex];
     }
 
-    public getRarityAverageProfit(name:string): void  {
-        return this.container[name]['rarity_average_profit'];
+    public getGuaranteedStackable(name: string, rarityIndex: number): boolean {
+        return this.containers[name].guaranteed_stackable[rarityIndex];
+    }
+
+    public getGuaranteedRandomness(name: string): Array<boolean> {
+        return this.containers[name].guaranteed_randomness;
+    }
+
+
+    public getPreset(name: string, rarityIndex: number): any {
+        return this.containers[name].presets[rarityIndex];
+    }
+
+    // Returns random Reward from possible Rewards
+    public getReward(name: string, rarityIndex: number): any {
+        const rewards: [] = this.containers[name].rewards[rarityIndex];
+        const randomNumber = this.getRandomInt(rewards.length);
+        return rewards[randomNumber];
+    }
+
+    // Returns the amount of rolls for each set of items in rewards
+    public getRewardRolls(name: string): Array<number>{
+        return this.containers[name].reward_rolls? this.containers[name].reward_rolls : undefined;
+    }
+
+    // Returns all rewards from possible rewards
+    public getRewards(name: string): Array<string> {
+        return this.containers[name].rewards;
+  
+    }
+
+    public getRewardAmount(name: string, rarityIndex: number): any {
+        return this.containers[name].reward_amount[rarityIndex];
+    }
+    
+    public getStackable(name: string, rarityIndex: number): boolean {
+        return this.containers[name].stackable[rarityIndex];
+    }
+
+    public getRandomAmount(name: string): number {
+        const min = this.containers[name].min;
+        const max = this.containers[name].max;
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    public getRarityAverageProfit(name:string): number  {
+        return this.containers[name].rarity_average_profit;
     }
 
     public getProfitPercentage(name:string): number  {
-        return this.container[name]['profit_percentage'];
+        return this.containers[name].profit_percentage;
     }
 
     public getOverride(name:string, item: any): number  {
-        return this.container[name]['override'][item];
+        return this.containers[name].override[item];
     }
 
     public setRarityAverageProfit(name:string, profit: Array<number>): void  {
-        //return this.container[name]['override'][item];
-        this.container[name]['rarity_average_profit'] = profit;
-    }
-
-    private containersData = {
-        'wallet': {
-            'name': 'wallet', 
-            'rarities': ["_extremely_rare", "_rare", "_kinda_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 115,
-            'rewards': [1000000, 500000, 300000, 100000, 50000],
-        },
-        'keycard': {
-            'name': 'keycard', 
-            'rarities': ["_red","_green", "_blue", "_violet","_black", "_yellow", "_blue_marking","_21WS", "_11SR", "_access"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 115,
-            'rewards': [
-                "5c1d0efb86f7744baf2e7b7b", // TerraGroup Labs keycard (Red)
-                "5c1d0dc586f7744baf2e7b79", // TerraGroup Labs keycard (Green)
-                "5c1d0c5f86f7744bb2683cf0", // TerraGroup Labs keycard (Blue)
-                "5c1e495a86f7743109743dfb", // TerraGroup Labs keycard (Violet)
-                "5c1d0f4986f7744bb01837fa", // TerraGroup Labs keycard (Black)
-                "5c1d0d6d86f7744bb2683e1f", // TerraGroup Labs keycard (Yellow)
-                "5efde6b4f5448336730dbd61", // Keycard with a blue marking
-                "5e42c83786f7742a021fdf3c", // Object #21WS keycard
-                "5e42c81886f7742a01529f57", // Object #11SR keycard
-                "5c94bbff86f7747ee735c08f", // TerraGroup Labs access keycard 
-            ],
-        },
-        'key': {
-            'name': 'key', 
-            'rarities': ["_extremely_rare", "_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 115,
-        },
-        'stim': {
-            'name': 'stim', 
-            'rarities': ["_extremely_rare", "_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 110,
-        },
-        'food': {
-            'name': 'food', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 110,
-        },
-        'melee': {
-            'name': 'melee', 
-            'rarities': ["_extremely_rare","_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 120,
-        },
-        'backpack': {
-            'name': 'backpack', 
-            'rarities': ["_extremely_rare", "_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 110,
-        },
-        'rig': {
-            'name': 'rig', 
-            'rarities': ["_boss", "_late_wipe", "_early_wipe", "_scav"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 110,
-        },
-        'gun': {
-            'name': 'gun', 
-            'rarities': ["_meta", "_meme", "_decent", "_scav", "_base"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 115,
-            'rewards': ["meta", "meme", "decent", "scav", "base"],
-        },
-        'premium_gun': {
-            'name': 'premium_gun', 
-            'rarities': ["_meta"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 115,
-            'rewards': ["meta"],
-        },
-        'helmet': {
-            'name': 'helmet', 
-            'rarities': ["_extremely_rare", "_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 115,
-            'rewards': ["extremely_rare", "rare", "uncommon", "common"],
-        },
-        'headset': {
-            'name': 'headset', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 115,
-        },
-        'armor': {
-            'name': 'armor', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 115,
-            'rewards': ["rare", "uncommon", "common"],
-        },
-        'premium_armor': {
-            'name': 'armor', 
-            'rarities': ["_rare"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 115,
-            'rewards': ["rare"],
-        },
-        'ammo': {
-            'name': 'ammo', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '7.62x25': {
-            'name': '7.62x25', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '9x18': {
-            'name': '9x18', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '9x19': {
-            'name': '9x19', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '9x21': {
-            'name': '9x21', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '.357': {
-            'name': '.357', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '.45': {
-            'name': '.45', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '4.6x30': {
-            'name': '4.6x30', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '5.7x28': {
-            'name': '5.7x28', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '5.45x39': {
-            'name': '5.45x39', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '5.56x45': {
-            'name': '5.56x45', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '.300': {
-            'name': '.300', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '7.62x39': {
-            'name': '7.62x39', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '7.62x51': {
-            'name': '7.62x51', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '7.62x54': {
-            'name': '7.62x54', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '.338': {
-            'name': '.338', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '9x39': {
-            'name': '9x39', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '.366': {
-            'name': '.366', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '12.7x55': {
-            'name': '12.7x55', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '12/70': {
-            'name': '12/70', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '20/70': {
-            'name': '20/70', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
-        '23x75': {
-            'name': '23x75', 
-            'rarities': ["_rare", "_uncommon", "_common"],
-            'odds': [],
-            'override': [],
-            'rarity_average_profit' : [],
-            'profit_percentage': 105,
-        },
+        //return this.containers[name]['override'][item];
+        this.containers[name].rarity_average_profit = profit;
     }
 }

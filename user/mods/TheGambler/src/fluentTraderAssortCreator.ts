@@ -150,7 +150,7 @@ export class FluentAssortConstructor
 
     /**
      * Reset objet ready for reuse
-     * @returns
+     * @returns 
      */
     public export(data: ITrader): FluentAssortConstructor
     {

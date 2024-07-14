@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Stashes = exports.inventorySlots = exports.allBotTypes = exports.currencyIDs = exports.traderIDs = void 0;
+;
 // Traders and Task related items
 //#region Enums
 var traderIDs;

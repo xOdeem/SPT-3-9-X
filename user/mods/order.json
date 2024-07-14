@@ -2,11 +2,30 @@
   "order": [
     "DrakiaXYZ-LiveFleaPrices",
     "fika-server",
-    "Fin-AutoBalanceLevelsFixed",
+    "aMoxoPixel-Painter",
     "TheGambler",
+    "Fin-AutoBalanceLevelsFixed",
     "tyfon-uifixes",
     "IhanaMies-LootValueBackend",
     "MoreCheckmarksBackend",
-    "zSolarint-SAIN-ServerMod"
+    "acidphantasm-bosseshavelegamedals",
+    "acidphantasm-refsptfriendlyquests",
+    "cj-removetimegatefromquests",
+    "ExpandedTaskText",
+    "MoxoPixel-BlackCore",
+    "MoxoPixel-MagTape",
+    "MoxoPixel-TacticalGearComponent",
+    "raid_review__0.1.1_NEXT",
+    "rairaitheraichu-ammostats-3.1.2",
+    "Virtual's Custom Quest Loader",
+    "WTT-Armory-Cheytac",
+    "WTT-Armory-SVD",
+    "WTT-Armory-Ak5C",
+    "WTT-Armory-HK417",
+    "WTT-Armory-RexTacWoS",
+    "Skwizzy-LootingBots-ServerMod",
+    "zSolarint-SAIN-ServerMod",
+    "SWAG",
+    "DanW-SPTQuestingBots"
   ]
 }

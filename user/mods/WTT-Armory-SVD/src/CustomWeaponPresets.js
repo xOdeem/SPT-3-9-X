@@ -30,14 +30,14 @@ exports.CustomWeaponPresets = void 0;
 const WeaponPresets_json_1 = __importDefault(require("../db/CustomWeaponPresets/WeaponPresets.json"));
 const path = __importStar(require("path"));
 const modPath = path.normalize(path.join(__dirname, ".."));
+const weaponPresets = WeaponPresets_json_1.default;
 class CustomWeaponPresets {
     Instance;
-    assortSchemes;
     preSptLoad(Instance) {
         this.Instance = Instance;
     }
     postDBLoad() {
-        if (WeaponPresets_json_1.default.ItemPresets) {
+        if (weaponPresets.ItemPresets) {
             this.addWeaponPresets();
             this.addWeaponPresetLocales();
         }
@@ -48,8 +48,9 @@ class CustomWeaponPresets {
         }
     }
     addWeaponPresets() {
-        for (const preset in WeaponPresets_json_1.default.ItemPresets)
-            this.Instance.database.globals.ItemPresets[preset] = WeaponPresets_json_1.default.ItemPresets[preset];
+        for (const preset in weaponPresets.ItemPresets) {
+            this.Instance.database.globals.ItemPresets[preset] = weaponPresets.ItemPresets[preset];
+        }
     }
     addWeaponPresetLocales() {
         const serverLocales = ["ch", "cz", "en", "es", "es-mx", "fr", "ge", "hu", "it", "jp", "kr", "pl", "po", "ru", "sk", "tu"];

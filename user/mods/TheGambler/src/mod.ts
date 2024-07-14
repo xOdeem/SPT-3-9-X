@@ -1,5 +1,5 @@
-import { DependencyContainer } from "tsyringe";
 // SPT types
+import { DependencyContainer } from "tsyringe";
 import { IPreSptLoadMod } from "@spt/models/external/IPreSptLoadMod";
 import { IPostDBLoadMod } from "@spt/models/external/IPostDBLoadMod";
 import { ILogger } from "@spt/models/spt/utils/ILogger";
@@ -17,8 +17,6 @@ import { IItemEventRouterResponse } from "@spt/models/eft/itemEvent/IItemEventRo
 import { LootGenerator } from "@spt/generators/LootGenerator";
 import { InventoryHelper } from "@spt/helpers/InventoryHelper";
 import { ItemHelper } from "@spt/helpers/ItemHelper";
-//import { NotifierHelper } from "@spt/helpers/NotifierHelper";
-//import { NotificationSendHelper } from "@spt/helpers/NotificationSendHelper";
 import { EventOutputHolder } from "@spt/routers/EventOutputHolder";
 import { RandomUtil } from "@spt/utils/RandomUtil";
 import { InventoryController } from "@spt/controllers/InventoryController";
@@ -29,9 +27,6 @@ import { Item } from "../common/tables/IItem";
 import { Money } from "@spt/models/enums/Money";
 import { Traders } from "@spt/models/enums/Traders";
 import { HashUtil } from "@spt/utils/HashUtil";
-import { Message } from "@spt/models/eft/profile/IAkiProfile";
-import { MessageType } from "@spt/models/enums/MessageType";
-import { INotification } from "@spt/models/eft/notifier/INotifier";
 
 
 // New trader classes and config
@@ -138,9 +133,6 @@ class SampleTrader implements IPreSptLoadMod, IPostDBLoadMod
     //
     public newOpenRandomLoot(container: DependencyContainer, pmcData: IPmcData, body: IOpenRandomLootContainerRequestData, sessionID: string): IItemEventRouterResponse {
         // Needed reference methods
-        // Message Notifier Doesn't Work Yet...
-        //const notifierHelper = container.resolve<NotifierHelper>("NotifierHelper");
-        //const notificationSendHelper = container.resolve<NotificationSendHelper>("NotificationSendHelper");
         const lootGenerator = container.resolve<LootGenerator>("LootGenerator");
         const itemHelper = container.resolve<ItemHelper>("ItemHelper");
         const inventoryHelper = container.resolve<InventoryHelper>("InventoryHelper");
@@ -188,56 +180,16 @@ class SampleTrader implements IPreSptLoadMod, IPostDBLoadMod
         } else {
             // Other custom gambling containers added by different mods
             //this.logger.info(`GET RANDOM LOOT CONTAINER LOOT`);
-            // Other random containers
             // Get summary of loot from config
             const rewardContainerDetails = inventoryHelper.getRandomLootContainerRewardDetails(openedItem._tpl);
             const getLoot = lootGenerator.getRandomLootContainerLoot(rewardContainerDetails);
-            //this.logger.info(getLoot);
-
             newItemsRequest.itemsWithModsToAdd.push(...getLoot);
-            newItemsRequest.foundInRaid = rewardContainerDetails.foundInRaid;
-            
+            newItemsRequest.foundInRaid = rewardContainerDetails.foundInRaid; 
         }
-
-
-        /*
-        notifierHelper.createNewMessageNotification({ // Not Working
-                    "_id": "",
-                    "uid": "",
-                    "type": 13,
-                    "dt": 69,
-                    "text": "Inventory Full!",
-                    "hasRewards": false, //idk
-                    "rewardCollected": false,//idk
-                    "items": {},
-                    "maxStorageTime": null
-                });
-        */
-
 
         const output = eventOutputHolder.getOutput(sessionID);
         let multipleItems: any;
-        /*
-        let message: Message = { // Not Working
-            _id: String,
-            uid: String,
-            type: MessageType,
-            text: String,
-            dt: Number
-        };
-        message._id = this.hashUtil.generate();
-        message.uid = this.hashUtil.generate();
-        message.type = 13;
-        message.text = "Inventory Full"
-        message.dt = 69
-        */
-        //this.logger.info(multipleItems);
 
-        //this.logger.info(message.type);
-
-
-        //console.log("END")
-        //console.log(newItemsRequest.itemsWithModsToAdd)
         if (newItemsRequest.itemsWithModsToAdd.length != 0) {
 
             if (inventoryHelper.canPlaceItemsInInventory(sessionID, newItemsRequest.itemsWithModsToAdd)){
