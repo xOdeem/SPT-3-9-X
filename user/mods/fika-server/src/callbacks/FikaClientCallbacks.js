@@ -37,6 +37,10 @@ let FikaClientCallbacks = class FikaClientCallbacks {
     handleCheckMods(_url, info, _sessionID) {
         return this.httpResponseUtil.noBody(this.fikaClientController.handleCheckMods(info));
     }
+    /** Handle /fika/profile/download */
+    handleProfileDownload(_url, info, sessionID) {
+        return this.httpResponseUtil.noBody(this.fikaClientController.handleProfileDownload(sessionID));
+    }
 };
 exports.FikaClientCallbacks = FikaClientCallbacks;
 exports.FikaClientCallbacks = FikaClientCallbacks = __decorate([

@@ -11,20 +11,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b;
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FikaClientController = void 0;
 const tsyringe_1 = require("C:/snapshot/project/node_modules/tsyringe");
 const FikaClientModHashesHelper_1 = require("../helpers/FikaClientModHashesHelper");
 const FikaConfig_1 = require("../utils/FikaConfig");
+const SaveServer_1 = require("C:/snapshot/project/obj/servers/SaveServer");
+const ILogger_1 = require("C:/snapshot/project/obj/models/spt/utils/ILogger");
 let FikaClientController = class FikaClientController {
     fikaClientModHashesHelper;
     fikaConfig;
+    saveServer;
+    logger;
     requiredMods;
     allowedMods;
-    constructor(fikaClientModHashesHelper, fikaConfig) {
+    constructor(fikaClientModHashesHelper, fikaConfig, saveServer, logger) {
         this.fikaClientModHashesHelper = fikaClientModHashesHelper;
         this.fikaConfig = fikaConfig;
+        this.saveServer = saveServer;
+        this.logger = logger;
         const config = this.fikaConfig.getConfig();
         this.requiredMods = new Set([...config.client.mods.required, "com.fika.core", "com.SPT.custom", "com.SPT.singleplayer", "com.SPT.core", "com.SPT.debugging"]);
         this.allowedMods = new Set([...this.requiredMods, ...config.client.mods.optional, "com.bepis.bepinex.configurationmanager"]);
@@ -79,12 +85,24 @@ let FikaClientController = class FikaClientController {
         }
         return mismatchedMods;
     }
+    /** Handle /fika/profile/download */
+    handleProfileDownload(sessionID) {
+        const profile = this.saveServer.getProfile(sessionID);
+        if (profile) {
+            this.logger.info(`${sessionID} has downloaded their profile`);
+            return profile;
+        }
+        this.logger.error(`${sessionID} wants to download their profile but we don't have it`);
+        return null;
+    }
 };
 exports.FikaClientController = FikaClientController;
 exports.FikaClientController = FikaClientController = __decorate([
     (0, tsyringe_1.injectable)(),
     __param(0, (0, tsyringe_1.inject)("FikaClientModHashesHelper")),
     __param(1, (0, tsyringe_1.inject)("FikaConfig")),
-    __metadata("design:paramtypes", [typeof (_a = typeof FikaClientModHashesHelper_1.FikaClientModHashesHelper !== "undefined" && FikaClientModHashesHelper_1.FikaClientModHashesHelper) === "function" ? _a : Object, typeof (_b = typeof FikaConfig_1.FikaConfig !== "undefined" && FikaConfig_1.FikaConfig) === "function" ? _b : Object])
+    __param(2, (0, tsyringe_1.inject)("SaveServer")),
+    __param(3, (0, tsyringe_1.inject)("WinstonLogger")),
+    __metadata("design:paramtypes", [typeof (_a = typeof FikaClientModHashesHelper_1.FikaClientModHashesHelper !== "undefined" && FikaClientModHashesHelper_1.FikaClientModHashesHelper) === "function" ? _a : Object, typeof (_b = typeof FikaConfig_1.FikaConfig !== "undefined" && FikaConfig_1.FikaConfig) === "function" ? _b : Object, typeof (_c = typeof SaveServer_1.SaveServer !== "undefined" && SaveServer_1.SaveServer) === "function" ? _c : Object, typeof (_d = typeof ILogger_1.ILogger !== "undefined" && ILogger_1.ILogger) === "function" ? _d : Object])
 ], FikaClientController);
 //# sourceMappingURL=FikaClientController.js.map

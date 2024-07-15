@@ -11,6 +11,8 @@ const ProfileController_1 = require("../overrides/controllers/ProfileController"
 const LauncherBackground_1 = require("../overrides/other/LauncherBackground");
 const Locales_1 = require("../overrides/other/Locales");
 const HttpRouter_1 = require("../overrides/routers/HttpRouter");
+const AchievementController_1 = require("../overrides/controllers/AchievementController");
+const FikaDatabaseService_1 = require("../overrides/services/FikaDatabaseService");
 const FikaMatchService_1 = require("../services/FikaMatchService");
 const FikaFriendRequestsCacheService_1 = require("../services/cache/FikaFriendRequestsCacheService");
 const FikaPlayerRelationsCacheService_1 = require("../services/cache/FikaPlayerRelationsCacheService");
@@ -23,6 +25,7 @@ const FikaLocationController_1 = require("../controllers/FikaLocationController"
 const FikaRaidController_1 = require("../controllers/FikaRaidController");
 const FikaSendItemController_1 = require("../controllers/FikaSendItemController");
 const FikaUpdateController_1 = require("../controllers/FikaUpdateController");
+const FikaAchievementController_1 = require("../controllers/FikaAchievementController");
 const FikaClientCallbacks_1 = require("../callbacks/FikaClientCallbacks");
 const FikaLocationCallbacks_1 = require("../callbacks/FikaLocationCallbacks");
 const FikaRaidCallbacks_1 = require("../callbacks/FikaRaidCallbacks");
@@ -56,6 +59,8 @@ class Container {
         container.registerType("Overrides", "HttpRouterOverride");
         container.registerType("Overrides", "LauncherBackgroundOverride");
         container.registerType("Overrides", "LocalesOverride");
+        container.registerType("Overrides", "AchievementControllerOverride");
+        container.registerType("Overrides", "DatabaseServiceOverride");
         container.registerType("StaticRoutes", "FikaClientStaticRouter");
         container.registerType("StaticRoutes", "FikaLocationStaticRouter");
         container.registerType("StaticRoutes", "FikaRaidStaticRouter");
@@ -76,6 +81,8 @@ class Container {
         container.register("LauncherBackgroundOverride", LauncherBackground_1.LauncherBackgroundOverride, { lifecycle: tsyringe_1.Lifecycle.Singleton });
         container.register("LocalesOverride", Locales_1.LocalesOverride, { lifecycle: tsyringe_1.Lifecycle.Singleton });
         container.register("Overrider", Overrider_1.Overrider, { lifecycle: tsyringe_1.Lifecycle.Singleton });
+        container.register("AchievementControllerOverride", AchievementController_1.AchievementControllerOverride, { lifecycle: tsyringe_1.Lifecycle.Singleton });
+        container.register("DatabaseServiceOverride", FikaDatabaseService_1.DatabaseServiceOverride, { lifecycle: tsyringe_1.Lifecycle.Singleton });
     }
     static registerServices(container) {
         container.register("FikaMatchService", FikaMatchService_1.FikaMatchService, { lifecycle: tsyringe_1.Lifecycle.Singleton });
@@ -94,6 +101,7 @@ class Container {
         container.register("FikaRaidController", { useClass: FikaRaidController_1.FikaRaidController });
         container.register("FikaSendItemController", { useClass: FikaSendItemController_1.FikaSendItemController });
         container.register("FikaUpdateController", { useClass: FikaUpdateController_1.FikaUpdateController });
+        container.register("FikaAchievementController", { useClass: FikaAchievementController_1.FikaAchievementController });
     }
     static registerCallbacks(container) {
         container.register("FikaClientCallbacks", { useClass: FikaClientCallbacks_1.FikaClientCallbacks });
