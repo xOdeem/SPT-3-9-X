@@ -3,7 +3,7 @@
         "useBtr": true,
         "friendlyFire": true,
         "dynamicVExfils": false,
-        "": false,
+        "allowFreeCam": false,
         "allowItemSending": true,
         "blacklistedItems": [],
         "forceSaveOnDeath": false,

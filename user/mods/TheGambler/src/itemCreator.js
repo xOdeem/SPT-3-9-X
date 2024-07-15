@@ -7,6 +7,7 @@ const HelmetPresets_1 = require("./presets/HelmetPresets");
 class ItemCreator {
     Weapons;
     Helmets;
+    headsetCompatible;
     Armors;
     caliber;
     magazine;
@@ -17,6 +18,7 @@ class ItemCreator {
     constructor(container) {
         this.Weapons = new WeaponPresets_1.WeaponPresets();
         this.Helmets = new HelmetPresets_1.HelmetPresets();
+        this.headsetCompatible = true;
         this.Armors = new ArmorPresets_1.ArmorPresets();
         this.hashUtil = container.resolve("HashUtil");
         this.itemHelper = container.resolve("ItemHelper");
@@ -109,6 +111,9 @@ class ItemCreator {
         build = build.Items;
         let baseId;
         for (let i = 0; i < build.length; i++) {
+            if (build[i]._tpl == "5a16b9fffcdbcb0176308b34") { // helmet has a headset
+                this.headsetCompatible = false;
+            }
             if (i == 0) { // item base
                 baseId = build[i]._id; // Need the base to reference in attachments
                 parentIdMap[baseId] = _randomId; // base id = _randomId

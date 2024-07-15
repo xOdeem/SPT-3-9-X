@@ -1,6 +1,6 @@
 {
   "General": {
-    "BotsUseGrenades": false,
+    "BotsUseGrenades": true,
     "BotWeightEffects": true,
     "VanillaBots": {
       "VanillaScavs": true,
@@ -92,13 +92,13 @@
       "DrawTransformGizmos": false,
       "DrawDoorLinks": false,
       "Overlay_Info": true,
-      "Overlay_Info_Expanded": true,
+      "Overlay_Info_Expanded": false,
       "Overlay_Search": true,
-      "Overlay_EnemyLists": true,
+      "Overlay_EnemyLists": false,
       "Overlay_EnemyInfo": true,
-      "Overlay_EnemyInfo_Expanded": true,
-      "Overlay_Decisions": true,
-      "OverLay_AimInfo": true,
+      "Overlay_EnemyInfo_Expanded": false,
+      "Overlay_Decisions": false,
+      "OverLay_AimInfo": false,
       "OverLay_AlwaysShowClosestHumanInfo": false,
       "OverLay_AlwaysShowMainPlayerInfo": false,
       "DebugRecoilCalculations": false,
@@ -138,10 +138,9 @@
     "IronSightScaleDistanceStart": 50.0,
     "IronSightScaleDistanceEnd": 100.0,
     "CenterMassVal": 0.3125,
-    "AccuracySpreadMultiGlobal": 0.8,
     "FasterCQBReactionsGlobal": true,
-    "PMCSAimForHead": false,
-    "PMCAimForHeadChance": 33.0
+    "PMCSAimForHead": true,
+    "PMCAimForHeadChance": 15.0
   },
   "Hearing": {
     "MaxFootstepAudioDistance": 70.0,
@@ -193,6 +192,65 @@
       "Caliber127x108": 300.0,
       "Caliber68x51": 200.0,
       "Default": 125.0
+    }
+  },
+  "Location": {
+    "Settings": {
+      "Factory": {
+        "VisionSpeedModifier": 1.0,
+        "ScatterMultiplier": 1.0,
+        "AggressionMultiplier": 1.0
+      },
+      "FactoryNight": {
+        "VisionSpeedModifier": 1.0,
+        "ScatterMultiplier": 1.0,
+        "AggressionMultiplier": 1.0
+      },
+      "Customs": {
+        "VisionSpeedModifier": 1.0,
+        "ScatterMultiplier": 1.0,
+        "AggressionMultiplier": 1.0
+      },
+      "GroundZero": {
+        "VisionSpeedModifier": 1.0,
+        "ScatterMultiplier": 1.0,
+        "AggressionMultiplier": 1.0
+      },
+      "Reserve": {
+        "VisionSpeedModifier": 1.0,
+        "ScatterMultiplier": 1.0,
+        "AggressionMultiplier": 1.0
+      },
+      "Streets": {
+        "VisionSpeedModifier": 1.0,
+        "ScatterMultiplier": 1.0,
+        "AggressionMultiplier": 1.0
+      },
+      "Lighthouse": {
+        "VisionSpeedModifier": 1.0,
+        "ScatterMultiplier": 1.0,
+        "AggressionMultiplier": 1.0
+      },
+      "Shoreline": {
+        "VisionSpeedModifier": 1.0,
+        "ScatterMultiplier": 1.0,
+        "AggressionMultiplier": 1.0
+      },
+      "Labs": {
+        "VisionSpeedModifier": 1.0,
+        "ScatterMultiplier": 1.0,
+        "AggressionMultiplier": 1.0
+      },
+      "Woods": {
+        "VisionSpeedModifier": 1.0,
+        "ScatterMultiplier": 1.0,
+        "AggressionMultiplier": 1.0
+      },
+      "Interchange": {
+        "VisionSpeedModifier": 1.0,
+        "ScatterMultiplier": 1.0,
+        "AggressionMultiplier": 1.0
+      }
     }
   },
   "Look": {
@@ -315,26 +373,26 @@
     "RecoilDecayCoef": 1.0,
     "RecoilRiseCoef": 8.0,
     "AmmoCaliberShootability": {
-      "Caliber9x18PM": 0.22,
-      "Caliber9x19PARA": 0.28,
-      "Caliber46x30": 0.32,
-      "Caliber9x21": 0.32,
+      "Caliber9x18PM": 0.225,
+      "Caliber9x19PARA": 0.275,
+      "Caliber46x30": 0.325,
+      "Caliber9x21": 0.325,
       "Caliber57x28": 0.35,
-      "Caliber762x25TT": 0.42,
-      "Caliber1143x23ACP": 0.42,
+      "Caliber762x25TT": 0.425,
+      "Caliber1143x23ACP": 0.425,
       "Caliber9x33R": 0.65,
-      "Caliber545x39": 0.52,
-      "Caliber556x45NATO": 0.52,
+      "Caliber545x39": 0.525,
+      "Caliber556x45NATO": 0.525,
       "Caliber9x39": 0.6,
-      "Caliber762x35": 0.58,
-      "Caliber762x39": 0.68,
-      "Caliber366TKM": 0.68,
-      "Caliber762x51": 0.72,
-      "Caliber127x55": 0.78,
+      "Caliber762x35": 0.575,
+      "Caliber762x39": 0.675,
+      "Caliber366TKM": 0.675,
+      "Caliber762x51": 0.725,
+      "Caliber127x55": 0.775,
       "Caliber762x54R": 0.85,
       "Caliber86x70": 1.0,
       "Caliber20g": 0.7,
-      "Caliber12g": 0.72,
+      "Caliber12g": 0.725,
       "Caliber23x75": 0.85,
       "Caliber26x75": 1.0,
       "Caliber30x29": 1.0,

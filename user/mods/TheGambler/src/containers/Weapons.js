@@ -6,16 +6,16 @@ class Weapons {
     rarities = [
         "_meta",
         "_decent",
+        "_meme",
         "_scav",
-        "_base",
-        "_meme"
+        "_base"
     ];
     presets = [
         "meta",
         "decent",
+        "meme",
         "scav",
-        "base",
-        "meme"
+        "base"
     ];
 }
 exports.Weapons = Weapons;

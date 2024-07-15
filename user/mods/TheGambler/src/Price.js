@@ -134,6 +134,7 @@ class Price {
                     currentContainerPrice += 50;
                 }
             }
+            //console.log(`Current Container Price: ${currentContainerPrice} Current Percentage: ${currentPercentage} Desired Percentage: ${desiredPercentage}`);
         }
         return currentContainerPrice;
     }

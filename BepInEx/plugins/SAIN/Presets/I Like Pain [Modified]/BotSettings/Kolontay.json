@@ -15,7 +15,7 @@
         "CanGrenade": true
       },
       "Aiming": {
-        "AimCenterMass": true,
+        "AimCenterMass": false,
         "DistanceAimTimeMultiplier": 1.0,
         "AngleAimTimeMultiplier": 1.0,
         "FasterCQBReactions": true,
@@ -41,7 +41,7 @@
         "CanThrowWhileSprinting": false,
         "ThrowAtVisibleEnemies": false,
         "TimeSinceSeenBeforeThrow": 3.0,
-        "ThrowGrenadeFrequency": 3.0,
+        "ThrowGrenadeFrequency": 4.0,
         "MinFriendlyDistance": 8.0,
         "MinEnemyDistance": 8.0,
         "GrenadePrecision": 0.01,
@@ -82,8 +82,8 @@
       },
       "Shoot": {
         "RecoilMultiplier": 1.0,
-        "BurstMulti": 1.5,
-        "FireratMulti": 1.80000007,
+        "BurstMulti": 2.0,
+        "FireratMulti": 1.5,
         "MaxPointFireDistance": 150.0,
         "AUTOMATIC_FIRE_SCATTERING_COEF": 1.1,
         "BASE_AUTOMATIC_TIME": 0.4,
@@ -102,7 +102,7 @@
         "CanGrenade": true
       },
       "Aiming": {
-        "AimCenterMass": true,
+        "AimCenterMass": false,
         "DistanceAimTimeMultiplier": 1.0,
         "AngleAimTimeMultiplier": 1.0,
         "FasterCQBReactions": true,
@@ -128,7 +128,7 @@
         "CanThrowWhileSprinting": false,
         "ThrowAtVisibleEnemies": false,
         "TimeSinceSeenBeforeThrow": 3.0,
-        "ThrowGrenadeFrequency": 3.0,
+        "ThrowGrenadeFrequency": 4.0,
         "MinFriendlyDistance": 8.0,
         "MinEnemyDistance": 8.0,
         "GrenadePrecision": 0.01,
@@ -169,8 +169,8 @@
       },
       "Shoot": {
         "RecoilMultiplier": 1.0,
-        "BurstMulti": 1.5,
-        "FireratMulti": 1.80000007,
+        "BurstMulti": 2.0,
+        "FireratMulti": 1.5,
         "MaxPointFireDistance": 150.0,
         "AUTOMATIC_FIRE_SCATTERING_COEF": 1.1,
         "BASE_AUTOMATIC_TIME": 0.4,
@@ -189,7 +189,7 @@
         "CanGrenade": true
       },
       "Aiming": {
-        "AimCenterMass": true,
+        "AimCenterMass": false,
         "DistanceAimTimeMultiplier": 1.0,
         "AngleAimTimeMultiplier": 1.0,
         "FasterCQBReactions": true,
@@ -215,7 +215,7 @@
         "CanThrowWhileSprinting": false,
         "ThrowAtVisibleEnemies": false,
         "TimeSinceSeenBeforeThrow": 3.0,
-        "ThrowGrenadeFrequency": 3.0,
+        "ThrowGrenadeFrequency": 4.0,
         "MinFriendlyDistance": 8.0,
         "MinEnemyDistance": 8.0,
         "GrenadePrecision": 0.01,
@@ -256,8 +256,8 @@
       },
       "Shoot": {
         "RecoilMultiplier": 1.0,
-        "BurstMulti": 1.5,
-        "FireratMulti": 1.80000007,
+        "BurstMulti": 2.0,
+        "FireratMulti": 1.5,
         "MaxPointFireDistance": 150.0,
         "AUTOMATIC_FIRE_SCATTERING_COEF": 1.1,
         "BASE_AUTOMATIC_TIME": 0.4,
@@ -276,7 +276,7 @@
         "CanGrenade": true
       },
       "Aiming": {
-        "AimCenterMass": true,
+        "AimCenterMass": false,
         "DistanceAimTimeMultiplier": 1.0,
         "AngleAimTimeMultiplier": 1.0,
         "FasterCQBReactions": true,
@@ -302,7 +302,7 @@
         "CanThrowWhileSprinting": false,
         "ThrowAtVisibleEnemies": false,
         "TimeSinceSeenBeforeThrow": 3.0,
-        "ThrowGrenadeFrequency": 3.0,
+        "ThrowGrenadeFrequency": 4.0,
         "MinFriendlyDistance": 8.0,
         "MinEnemyDistance": 8.0,
         "GrenadePrecision": 0.01,
@@ -343,8 +343,8 @@
       },
       "Shoot": {
         "RecoilMultiplier": 1.0,
-        "BurstMulti": 1.5,
-        "FireratMulti": 1.80000007,
+        "BurstMulti": 2.0,
+        "FireratMulti": 1.5,
         "MaxPointFireDistance": 150.0,
         "AUTOMATIC_FIRE_SCATTERING_COEF": 1.1,
         "BASE_AUTOMATIC_TIME": 0.4,

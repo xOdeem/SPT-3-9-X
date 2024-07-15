@@ -146,7 +146,7 @@
 	},
   "CustomBosses": {
     "santa": {
-			"enabled": true,
+			"enabled": false,
       "forceSpawnOutsideEvent": false,
       "customs": 0,
       "factory": 0,

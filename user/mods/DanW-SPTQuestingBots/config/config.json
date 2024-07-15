@@ -22,7 +22,12 @@
 	"questing": {
 		"enabled": true,
 		"bot_pathing_update_interval_ms": 100,
-		"brain_layer_priority": 26,
+		"brain_layer_priorities": {
+			"questing": 18,
+			"following": 19,
+			"regrouping": 26,
+			"sleeping": 99
+		},
 		"quest_selection_timeout": 250,
 		"btr_run_distance": 10,
 		"allowed_bot_types_for_questing": {
@@ -83,8 +88,8 @@
 			"min_health_legs": 50,
 			"max_overweight_percentage": 100,
 			"search_time_after_combat": {
-				"min": 20,
-				"max": 45
+				"min": 10,
+				"max": 20
 			},
 			"hearing_sensor": {
 				"enabled": true,
@@ -131,9 +136,13 @@
 				"max_wait_time": 5,
 				"min_regroup_time": 1,
 				"regroup_pause_time": 2,
-				"target_range": {
+				"target_range_questing": {
 					"min": 7,
 					"max": 12
+				},
+				"target_range_combat": {
+					"min": 20,
+					"max": 30
 				},
 				"nearest": 15,
 				"furthest": 25
@@ -233,11 +242,11 @@
 		}
 	},
 	"bot_spawns": {
-		"enabled": true,
+		"enabled": false,
 		"blacklisted_pmc_bot_brains": [ "bossKilla", "bossTagilla", "exUsec", "followerGluharAssault", "followerGluharProtect", "crazyAssaultEvent", "bossKnight" ],
 		"spawn_retry_time": 10,
-		"delay_game_start_until_bot_gen_finishes": true,
-		"spawn_initial_bosses_first": false,
+		"delay_game_start_until_bot_gen_finishes": false,
+		"spawn_initial_bosses_first": true,
 		"non_wave_bot_spawn_period_factor": 3,
 		"advanced_eft_bot_count_management": {
 			"enabled": true,
